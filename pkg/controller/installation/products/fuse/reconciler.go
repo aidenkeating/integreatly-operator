@@ -3,12 +3,13 @@ package fuse
 import (
 	"context"
 	"fmt"
+	"strings"
+
 	appsv1 "github.com/openshift/api/apps/v1"
 	v1 "github.com/openshift/api/route/v1"
 	v12 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
-	"strings"
 
 	"github.com/integr8ly/integreatly-operator/pkg/apis/integreatly/v1alpha1"
 	"github.com/integr8ly/integreatly-operator/pkg/controller/installation/marketplace"
@@ -28,7 +29,7 @@ import (
 
 const (
 	defaultInstallationNamespace = "fuse"
-	defaultSubscriptionName      = "integreatly-syndesis"
+	defaultSubscriptionName      = "integreatly-fuse-online"
 	adminGroupName               = "dedicated-admins"
 )
 
