@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cloud-resource-config
+data:
+  managed: |
+    {"blobstorage":"aws", "smtpcredentials":"aws", "redis":"aws", "postgres":"aws"}
+  workshop: |
+    {"blobstorage":"openshift", "smtpcredentials":"openshift", "redis":"openshift", "postgres":"openshift"}
+  rhpds: |
+    {"blobstorage":"aws", "smtpcredentials":"openshift", "redis":"openshift", "postgres":"openshift"}

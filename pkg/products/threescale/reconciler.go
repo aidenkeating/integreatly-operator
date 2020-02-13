@@ -367,7 +367,7 @@ func (r *Reconciler) reconcileComponents(ctx context.Context, serverClient k8scl
 	}
 
 	// create the 3scale api manager
-	resourceRequirements := true
+	resourceRequirements := r.installation.Spec.Type != string(integreatlyv1alpha1.InstallationTypePDS)
 	apim := &threescalev1.APIManager{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      apiManagerName,

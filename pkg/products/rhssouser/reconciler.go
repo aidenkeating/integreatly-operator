@@ -235,8 +235,13 @@ func (r *Reconciler) reconcileCloudResources(ctx context.Context, installation *
 	return integreatlyv1alpha1.PhaseCompleted, nil
 }
 
+
 func (r *Reconciler) reconcileComponents(ctx context.Context, installation *integreatlyv1alpha1.RHMI, serverClient k8sclient.Client) (integreatlyv1alpha1.StatusPhase, error) {
 	r.logger.Info("Reconciling Keycloak components")
+	instanceCount := 2
+	if installation.Spec.Type == string(integreatlyv1alpha1.InstallationTypePDS) {
+		instanceCount = 1
+	}
 	kc := &keycloak.Keycloak{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      keycloakName,
@@ -248,9 +253,8 @@ func (r *Reconciler) reconcileComponents(ctx context.Context, installation *inte
 		kc.Spec.Extensions = []string{
 			"https://github.com/aerogear/keycloak-metrics-spi/releases/download/1.0.4/keycloak-metrics-spi-1.0.4.jar",
 		}
-		kc.Spec.ExternalDatabase = keycloak.KeycloakExternalDatabase{Enabled: true}
 		kc.Labels = getMasterLabels()
-		kc.Spec.Instances = 2
+		kc.Spec.Instances = instanceCount
 		kc.Spec.ExternalAccess = keycloak.KeycloakExternalAccess{Enabled: true}
 		kc.Spec.Profile = rhsso.RHSSOProfile
 		return nil

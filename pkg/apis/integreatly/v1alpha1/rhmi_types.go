@@ -27,6 +27,7 @@ var (
 
 	InstallationTypeWorkshop InstallationType = "workshop"
 	InstallationTypeManaged  InstallationType = "managed"
+	InstallationTypePDS      InstallationType = "rhpds"
 
 	BootstrapStage        StageName = "bootstrap"
 	CloudResourcesStage   StageName = "cloud-resources"

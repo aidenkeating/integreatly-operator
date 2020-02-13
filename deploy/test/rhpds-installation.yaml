@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: RHMI
+metadata:
+  name: integreatly
+spec:
+  namespacePrefix: redhat-rhmi-
+  type: rhpds
+  smtpSecret: redhat-rhmi-smtp
+  selfSignedCerts: false
+  useClusterStorage: "false"
+  pagerdutySecret: redhat-rhmi-pagerduty
+  deadMansSnitchSecret: redhat-rhmi-deadmanssnitch

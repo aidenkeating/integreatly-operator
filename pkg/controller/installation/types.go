@@ -131,7 +131,7 @@ func TypeFactory(installationType string, products []string) (*Type, error) {
 	switch installationType {
 	case string(integreatlyv1alpha1.InstallationTypeWorkshop):
 		return newWorkshopType(products), nil
-	case string(integreatlyv1alpha1.InstallationTypeManaged):
+	case string(integreatlyv1alpha1.InstallationTypeManaged), string(integreatlyv1alpha1.InstallationTypePDS):
 		return newManagedType(products), nil
 	default:
 		return nil, errors.New("unknown installation type: " + installationType)
@@ -179,7 +179,7 @@ func buildProducts(t *Type, products []string, installType integreatlyv1alpha1.I
 	for _, p := range products {
 		product := strings.ToLower(strings.TrimSpace(p))
 		if product == "all" {
-			if installType == integreatlyv1alpha1.InstallationTypeManaged {
+			if installType == integreatlyv1alpha1.InstallationTypeManaged || installType == integreatlyv1alpha1.InstallationTypePDS {
 				t.Stages = allManagedStages
 			} else if installType == integreatlyv1alpha1.InstallationTypeWorkshop {
 				t.Stages = allWorkshopStages
